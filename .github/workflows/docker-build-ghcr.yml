@@ -5,7 +5,6 @@ on:
     paths-ignore:
       - "**.md"
     branches:
-      - master
       - dev
     tags:
       - 'v*'
@@ -17,10 +16,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Defer workflow for 60 seconds
-        run: sleep 60s
-        shell: bash
 
       - name: Prepare Docker Meta
         id: meta
