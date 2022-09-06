@@ -10,10 +10,6 @@ on:
     tags:
       - 'v*'
 
-env:
-  IMAGE: ghcr.io/no767/kumiko
-  VERSION: latest
-  DEV_TAGGED_VERSION: v0.4.0
 
 jobs:
   Build:
@@ -33,10 +29,11 @@ jobs:
           images: |
             ghcr.io/no767/docker-meta-test
           tags: |
-            type=ref,event=tag
-            type=edge,branch=dev,suffix=-{{sha}}
-          flavor: |
-            latest=true
+            type=semver,pattern={{raw}}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=edge,branch=dev
 
       - name: Setup Docker Buildx
         id: buildx
